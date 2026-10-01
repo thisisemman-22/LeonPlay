@@ -1,0 +1,505 @@
+DiPlay 0.2.8 · private beta diagnostic report
+Android 16 / API 36
+Head unit: samsung SM-X400
+Connection: USB
+Authentication: local experimental beta identity; no remote fallback
+CarPlay setup: ready
+Saved video preference (may differ from active session): H.264; 30 fps
+CarPlay size: Medium
+Saved resolution preference (may differ from active session): 100%
+Session: connecting
+Head-unit board: s5e8835; hardware: s5e8835; build: BP4A.251205.006.X400XXS7CZH6
+
+--- Last display negotiation (timestamps distinguish it from current settings) ---
+2026-10-01 21:52:56.052 Display request selected=Default percent=100 surface=2112x1320 resolution=100% base=2112x1320 candidate=2112x1320 fps=30 codec=H.264 softwareHevc=false
+2026-10-01 21:52:56.052 Decoder capability enlargement check not required
+2026-10-01 21:52:56.052 Display effective percent=100 canvas=2112x1320 decision=not_enlarging physical=300x188mm safeArea=AirPlayInsets(top=0, bottom=0, left=0, right=0) drawOutside=true
+
+--- previous-2.log ---
+DiPlay log started 2026-10-01 21:49:20.030 pid=30587 path=/data/user/0/com.shihab.diplay/files/logs/diplay.log
+21:49:20.066  Host started; MFI target=Local offline; transport=wireless
+21:49:20.101  Texture surface created
+21:49:20.605  Display detected: 2112x1320
+21:49:21.299  Microphone permission granted
+21:49:21.420  Wireless startup permissions granted
+21:49:21.438  CarPlay size=Default canvas=2112x1320
+21:49:21.447  Display request selected=Default percent=100 surface=2112x1320 resolution=100% base=2112x1320 candidate=2112x1320 fps=30 codec=H.264 softwareHevc=false
+21:49:21.447  Decoder capability enlargement check not required
+21:49:21.448  Display effective percent=100 canvas=2112x1320 decision=not_enlarging physical=300x188mm safeArea=AirPlayInsets(top=0, bottom=0, left=0, right=0) drawOutside=true
+21:49:21.456  Starting CarPlay controller at 2112x1320 -> 2112x1320 (1.0x) physical=300x188mm video=H.264 decoder=hardware microphone=true location=disabled mfi=Local offline
+21:49:21.468  mfi discovery backend=LocalOffline remoteFallback=disabled
+21:49:21.477  STEP mfi/start: preparing the configured MFi authentication provider
+21:49:21.481  STEP mfi/ready: MFi authentication provider is ready
+21:49:21.483  STEP wifi/ap: starting the wireless CarPlay access point
+21:49:21.484  wireless bring-up generation=1 starting
+21:49:21.494  Wi-Fi P2P preflight wifiEnabled=true locationEnabled=true permissionGranted=true locationAccessMode=unknown stationMHz=5180 stationState=COMPLETED reportedStationMHz=5180 fiveGhzSupported=true
+21:49:21.495  Wi-Fi P2P remembered unavailable
+21:49:21.502  Wi-Fi P2P frameworkState=2
+21:49:21.506  Wi-Fi P2P existingGroup=false
+21:49:21.510  Wi-Fi P2P create mode=ALIGNED_5_GHZ frequencyMHz=5180
+21:49:21.764  Wi-Fi P2P startup stopped type=IOException
+21:49:21.768  Wi-Fi P2P remove rejected code=2 reason=Wi-Fi P2P is busy
+21:49:21.769  wireless bring-up failed: Could not establish WIFI_P2P hotspot: Unsupported Wi-Fi P2P security type: -1
+21:49:21.772  ERROR Could not establish WIFI_P2P hotspot: Unsupported Wi-Fi P2P security type: -1
+21:49:21.774  Failed: Could not establish WIFI_P2P hotspot: Unsupported Wi-Fi P2P security type: -1; retrying in 2000ms
+21:49:23.778  Reconnecting after Failed: Could not establish WIFI_P2P hotspot: Unsupported Wi-Fi P2P security type: -1
+21:49:23.794  CarPlay size=Default canvas=2112x1320
+21:49:23.798  Display request selected=Default percent=100 surface=2112x1320 resolution=100% base=2112x1320 candidate=2112x1320 fps=30 codec=H.264 softwareHevc=false
+21:49:23.799  Decoder capability enlargement check not required
+21:49:23.800  Display effective percent=100 canvas=2112x1320 decision=not_enlarging physical=300x188mm safeArea=AirPlayInsets(top=0, bottom=0, left=0, right=0) drawOutside=true
+21:49:23.805  Starting CarPlay controller at 2112x1320 -> 2112x1320 (1.0x) physical=300x188mm video=H.264 decoder=hardware microphone=true location=disabled mfi=Local offline
+21:49:23.807  mfi discovery backend=LocalOffline remoteFallback=disabled
+21:49:23.812  STEP mfi/start: preparing the configured MFi authentication provider
+21:49:23.813  STEP mfi/ready: MFi authentication provider is ready
+21:49:23.814  STEP wifi/ap: starting the wireless CarPlay access point
+21:49:23.815  wireless bring-up generation=1 starting
+21:49:23.822  Wi-Fi P2P preflight wifiEnabled=true locationEnabled=true permissionGranted=true locationAccessMode=unknown stationMHz=5180 stationState=COMPLETED reportedStationMHz=5180 fiveGhzSupported=true
+21:49:23.824  Wi-Fi P2P remembered unavailable
+21:49:23.825  Wi-Fi P2P frameworkState=2
+21:49:23.826  Wi-Fi P2P existingGroup=true
+21:49:23.827  Wi-Fi P2P reclaiming retained owned group
+21:49:23.975  Wi-Fi P2P create mode=ALIGNED_5_GHZ frequencyMHz=5180
+21:49:24.854  Wi-Fi P2P startup stopped type=IOException
+21:49:24.865  wireless bring-up failed: Could not establish WIFI_P2P hotspot: Unsupported Wi-Fi P2P security type: -1
+21:49:24.867  ERROR Could not establish WIFI_P2P hotspot: Unsupported Wi-Fi P2P security type: -1
+21:49:24.869  Failed: Could not establish WIFI_P2P hotspot: Unsupported Wi-Fi P2P security type: -1; retrying in 4000ms
+21:49:28.871  Reconnecting after Failed: Could not establish WIFI_P2P hotspot: Unsupported Wi-Fi P2P security type: -1
+21:49:28.881  CarPlay size=Default canvas=2112x1320
+21:49:28.883  Display request selected=Default percent=100 surface=2112x1320 resolution=100% base=2112x1320 candidate=2112x1320 fps=30 codec=H.264 softwareHevc=false
+21:49:28.883  Decoder capability enlargement check not required
+21:49:28.884  Display effective percent=100 canvas=2112x1320 decision=not_enlarging physical=300x188mm safeArea=AirPlayInsets(top=0, bottom=0, left=0, right=0) drawOutside=true
+21:49:28.886  Starting CarPlay controller at 2112x1320 -> 2112x1320 (1.0x) physical=300x188mm video=H.264 decoder=hardware microphone=true location=disabled mfi=Local offline
+21:49:28.890  mfi discovery backend=LocalOffline remoteFallback=disabled
+21:49:28.891  STEP mfi/start: preparing the configured MFi authentication provider
+21:49:28.903  STEP mfi/ready: MFi authentication provider is ready
+21:49:28.904  STEP wifi/ap: starting the wireless CarPlay access point
+21:49:28.905  wireless bring-up generation=1 starting
+21:49:28.905  Wi-Fi P2P preflight wifiEnabled=true locationEnabled=true permissionGranted=true locationAccessMode=unknown stationMHz=5180 stationState=COMPLETED reportedStationMHz=5180 fiveGhzSupported=true
+21:49:28.905  Wi-Fi P2P remembered unavailable
+21:49:28.906  Wi-Fi P2P frameworkState=2
+21:49:28.913  Wi-Fi P2P existingGroup=false
+21:49:28.914  Wi-Fi P2P create mode=ALIGNED_5_GHZ frequencyMHz=5180
+21:49:28.984  Wi-Fi P2P startup stopped type=IOException
+21:49:28.987  Wi-Fi P2P remove rejected code=2 reason=Wi-Fi P2P is busy
+21:49:28.987  wireless bring-up failed: Could not establish WIFI_P2P hotspot: Unsupported Wi-Fi P2P security type: -1
+21:49:28.988  ERROR Could not establish WIFI_P2P hotspot: Unsupported Wi-Fi P2P security type: -1
+21:49:28.989  Failed: Could not establish WIFI_P2P hotspot: Unsupported Wi-Fi P2P security type: -1; retrying in 8000ms
+21:49:36.989  Reconnecting after Failed: Could not establish WIFI_P2P hotspot: Unsupported Wi-Fi P2P security type: -1
+21:49:37.002  CarPlay size=Default canvas=2112x1320
+21:49:37.004  Display request selected=Default percent=100 surface=2112x1320 resolution=100% base=2112x1320 candidate=2112x1320 fps=30 codec=H.264 softwareHevc=false
+21:49:37.004  Decoder capability enlargement check not required
+21:49:37.005  Display effective percent=100 canvas=2112x1320 decision=not_enlarging physical=300x188mm safeArea=AirPlayInsets(top=0, bottom=0, left=0, right=0) drawOutside=true
+21:49:37.006  Starting CarPlay controller at 2112x1320 -> 2112x1320 (1.0x) physical=300x188mm video=H.264 decoder=hardware microphone=true location=disabled mfi=Local offline
+21:49:37.009  mfi discovery backend=LocalOffline remoteFallback=disabled
+21:49:37.014  STEP mfi/start: preparing the configured MFi authentication provider
+21:49:37.015  STEP mfi/ready: MFi authentication provider is ready
+21:49:37.016  STEP wifi/ap: starting the wireless CarPlay access point
+21:49:37.017  wireless bring-up generation=1 starting
+21:49:37.017  Wi-Fi P2P preflight wifiEnabled=true locationEnabled=true permissionGranted=true locationAccessMode=unknown stationMHz=5180 stationState=COMPLETED reportedStationMHz=5180 fiveGhzSupported=true
+21:49:37.017  Wi-Fi P2P remembered unavailable
+21:49:37.018  Wi-Fi P2P frameworkState=2
+21:49:37.018  Wi-Fi P2P existingGroup=true
+21:49:37.018  Wi-Fi P2P reclaiming retained owned group
+21:49:37.174  Wi-Fi P2P create mode=ALIGNED_5_GHZ frequencyMHz=5180
+21:49:38.170  Wi-Fi P2P startup stopped type=IOException
+21:49:38.196  wireless bring-up failed: Could not establish WIFI_P2P hotspot: Unsupported Wi-Fi P2P security type: -1
+21:49:38.199  ERROR Could not establish WIFI_P2P hotspot: Unsupported Wi-Fi P2P security type: -1
+21:49:38.203  Failed: Could not establish WIFI_P2P hotspot: Unsupported Wi-Fi P2P security type: -1; retrying in 16000ms
+21:49:54.207  Reconnecting after Failed: Could not establish WIFI_P2P hotspot: Unsupported Wi-Fi P2P security type: -1
+21:49:54.214  CarPlay size=Default canvas=2112x1320
+21:49:54.220  Display request selected=Default percent=100 surface=2112x1320 resolution=100% base=2112x1320 candidate=2112x1320 fps=30 codec=H.264 softwareHevc=false
+21:49:54.221  Decoder capability enlargement check not required
+21:49:54.223  Display effective percent=100 canvas=2112x1320 decision=not_enlarging physical=300x188mm safeArea=AirPlayInsets(top=0, bottom=0, left=0, right=0) drawOutside=true
+21:49:54.231  Starting CarPlay controller at 2112x1320 -> 2112x1320 (1.0x) physical=300x188mm video=H.264 decoder=hardware microphone=true location=disabled mfi=Local offline
+21:49:54.236  mfi discovery backend=LocalOffline remoteFallback=disabled
+21:49:54.247  STEP mfi/start: preparing the configured MFi authentication provider
+21:49:54.250  STEP mfi/ready: MFi authentication provider is ready
+21:49:54.252  STEP wifi/ap: starting the wireless CarPlay access point
+21:49:54.255  wireless bring-up generation=1 starting
+21:49:54.256  Wi-Fi P2P preflight wifiEnabled=true locationEnabled=true permissionGranted=true locationAccessMode=unknown stationMHz=5180 stationState=COMPLETED reportedStationMHz=5180 fiveGhzSupported=true
+21:49:54.257  Wi-Fi P2P remembered unavailable
+21:49:54.258  Wi-Fi P2P frameworkState=2
+21:49:54.260  Wi-Fi P2P existingGroup=false
+21:49:54.263  Wi-Fi P2P create mode=ALIGNED_5_GHZ frequencyMHz=5180
+21:49:54.343  Wi-Fi P2P startup stopped type=IOException
+21:49:54.353  Wi-Fi P2P remove rejected code=2 reason=Wi-Fi P2P is busy
+21:49:54.358  wireless bring-up failed: Could not establish WIFI_P2P hotspot: Unsupported Wi-Fi P2P security type: -1
+21:49:54.359  ERROR Could not establish WIFI_P2P hotspot: Unsupported Wi-Fi P2P security type: -1
+21:49:54.362  Failed: Could not establish WIFI_P2P hotspot: Unsupported Wi-Fi P2P security type: -1; retrying in 30000ms
+21:50:24.364  Reconnecting after Failed: Could not establish WIFI_P2P hotspot: Unsupported Wi-Fi P2P security type: -1
+21:50:24.368  CarPlay size=Default canvas=2112x1320
+21:50:24.370  Display request selected=Default percent=100 surface=2112x1320 resolution=100% base=2112x1320 candidate=2112x1320 fps=30 codec=H.264 softwareHevc=false
+21:50:24.370  Decoder capability enlargement check not required
+21:50:24.370  Display effective percent=100 canvas=2112x1320 decision=not_enlarging physical=300x188mm safeArea=AirPlayInsets(top=0, bottom=0, left=0, right=0) drawOutside=true
+21:50:24.374  Starting CarPlay controller at 2112x1320 -> 2112x1320 (1.0x) physical=300x188mm video=H.264 decoder=hardware microphone=true location=disabled mfi=Local offline
+21:50:24.377  mfi discovery backend=LocalOffline remoteFallback=disabled
+21:50:24.379  STEP mfi/start: preparing the configured MFi authentication provider
+21:50:24.402  STEP mfi/ready: MFi authentication provider is ready
+21:50:24.402  STEP wifi/ap: starting the wireless CarPlay access point
+21:50:24.403  wireless bring-up generation=1 starting
+21:50:24.403  Wi-Fi P2P preflight wifiEnabled=false locationEnabled=true permissionGranted=true locationAccessMode=unknown stationMHz=unknown stationState=UNINITIALIZED reportedStationMHz=unknown fiveGhzSupported=true
+21:50:24.404  Wi-Fi P2P startup stopped type=IOException
+21:50:24.404  wireless bring-up failed: Could not establish WIFI_P2P hotspot: Turn on Wi-Fi in the head unit's settings, then reconnect
+21:50:24.404  ERROR Could not establish WIFI_P2P hotspot: Turn on Wi-Fi in the head unit's settings, then reconnect
+21:50:24.405  Failed: Could not establish WIFI_P2P hotspot: Turn on Wi-Fi in the head unit's settings, then reconnect; retrying in 30000ms
+Activity destroyed
+--- previous.log ---
+DiPlay log started 2026-10-01 21:50:52.413 pid=30587 path=/data/user/0/com.shihab.diplay/files/logs/diplay.log
+21:50:52.429  Host started; MFI target=Local offline; transport=wireless
+21:50:52.460  Texture surface created
+21:50:52.962  Display detected: 2112x1320
+21:50:52.967  CarPlay size=Default canvas=2112x1320
+21:50:52.972  Display request selected=Default percent=100 surface=2112x1320 resolution=100% base=2112x1320 candidate=2112x1320 fps=30 codec=H.264 softwareHevc=false
+21:50:52.973  Decoder capability enlargement check not required
+21:50:52.975  Display effective percent=100 canvas=2112x1320 decision=not_enlarging physical=300x188mm safeArea=AirPlayInsets(top=0, bottom=0, left=0, right=0) drawOutside=true
+21:50:52.982  Starting CarPlay controller at 2112x1320 -> 2112x1320 (1.0x) physical=300x188mm video=H.264 decoder=hardware microphone=true location=disabled mfi=Local offline
+21:50:52.993  mfi discovery backend=LocalOffline remoteFallback=disabled
+21:50:53.012  STEP mfi/start: preparing the configured MFi authentication provider
+21:50:53.025  STEP mfi/ready: MFi authentication provider is ready
+21:50:53.027  STEP wifi/ap: starting the wireless CarPlay access point
+21:50:53.028  wireless bring-up generation=1 starting
+21:50:53.029  Wi-Fi P2P preflight wifiEnabled=true locationEnabled=true permissionGranted=true locationAccessMode=unknown stationMHz=5180 stationState=COMPLETED reportedStationMHz=5180 fiveGhzSupported=true
+21:50:53.030  Wi-Fi P2P remembered unavailable
+21:50:53.031  Wi-Fi P2P frameworkState=2
+21:50:53.031  Wi-Fi P2P existingGroup=false
+21:50:53.032  Wi-Fi P2P create mode=ALIGNED_5_GHZ frequencyMHz=5180
+21:50:53.189  Wi-Fi P2P startup stopped type=IOException
+21:50:53.195  Wi-Fi P2P remove rejected code=2 reason=Wi-Fi P2P is busy
+21:50:53.196  wireless bring-up failed: Could not establish WIFI_P2P hotspot: Unsupported Wi-Fi P2P security type: -1
+21:50:53.197  ERROR Could not establish WIFI_P2P hotspot: Unsupported Wi-Fi P2P security type: -1
+21:50:53.199  Failed: Could not establish WIFI_P2P hotspot: Unsupported Wi-Fi P2P security type: -1; retrying in 2000ms
+21:50:55.202  Reconnecting after Failed: Could not establish WIFI_P2P hotspot: Unsupported Wi-Fi P2P security type: -1
+21:50:55.212  CarPlay size=Default canvas=2112x1320
+21:50:55.214  Display request selected=Default percent=100 surface=2112x1320 resolution=100% base=2112x1320 candidate=2112x1320 fps=30 codec=H.264 softwareHevc=false
+21:50:55.214  Decoder capability enlargement check not required
+21:50:55.215  Display effective percent=100 canvas=2112x1320 decision=not_enlarging physical=300x188mm safeArea=AirPlayInsets(top=0, bottom=0, left=0, right=0) drawOutside=true
+21:50:55.218  Starting CarPlay controller at 2112x1320 -> 2112x1320 (1.0x) physical=300x188mm video=H.264 decoder=hardware microphone=true location=disabled mfi=Local offline
+21:50:55.222  mfi discovery backend=LocalOffline remoteFallback=disabled
+21:50:55.229  STEP mfi/start: preparing the configured MFi authentication provider
+21:50:55.230  STEP mfi/ready: MFi authentication provider is ready
+21:50:55.232  STEP wifi/ap: starting the wireless CarPlay access point
+21:50:55.233  wireless bring-up generation=1 starting
+21:50:55.237  Wi-Fi P2P preflight wifiEnabled=true locationEnabled=true permissionGranted=true locationAccessMode=unknown stationMHz=5180 stationState=COMPLETED reportedStationMHz=5180 fiveGhzSupported=true
+21:50:55.238  Wi-Fi P2P remembered unavailable
+21:50:55.269  Wi-Fi P2P frameworkState=2
+21:50:55.275  Wi-Fi P2P existingGroup=true
+21:50:55.276  Wi-Fi P2P reclaiming retained owned group
+21:50:55.630  Wi-Fi P2P create mode=ALIGNED_5_GHZ frequencyMHz=5180
+21:50:56.311  Wi-Fi P2P startup stopped type=IOException
+21:50:56.318  wireless bring-up failed: Could not establish WIFI_P2P hotspot: Unsupported Wi-Fi P2P security type: -1
+21:50:56.319  ERROR Could not establish WIFI_P2P hotspot: Unsupported Wi-Fi P2P security type: -1
+21:50:56.320  Failed: Could not establish WIFI_P2P hotspot: Unsupported Wi-Fi P2P security type: -1; retrying in 4000ms
+21:51:00.326  Reconnecting after Failed: Could not establish WIFI_P2P hotspot: Unsupported Wi-Fi P2P security type: -1
+21:51:00.340  CarPlay size=Default canvas=2112x1320
+21:51:00.344  Display request selected=Default percent=100 surface=2112x1320 resolution=100% base=2112x1320 candidate=2112x1320 fps=30 codec=H.264 softwareHevc=false
+21:51:00.345  Decoder capability enlargement check not required
+21:51:00.346  Display effective percent=100 canvas=2112x1320 decision=not_enlarging physical=300x188mm safeArea=AirPlayInsets(top=0, bottom=0, left=0, right=0) drawOutside=true
+21:51:00.349  Starting CarPlay controller at 2112x1320 -> 2112x1320 (1.0x) physical=300x188mm video=H.264 decoder=hardware microphone=true location=disabled mfi=Local offline
+21:51:00.352  mfi discovery backend=LocalOffline remoteFallback=disabled
+21:51:00.353  STEP mfi/start: preparing the configured MFi authentication provider
+21:51:00.366  STEP mfi/ready: MFi authentication provider is ready
+21:51:00.368  STEP wifi/ap: starting the wireless CarPlay access point
+21:51:00.370  wireless bring-up generation=1 starting
+21:51:00.371  Wi-Fi P2P preflight wifiEnabled=true locationEnabled=true permissionGranted=true locationAccessMode=unknown stationMHz=5180 stationState=COMPLETED reportedStationMHz=5180 fiveGhzSupported=true
+21:51:00.372  Wi-Fi P2P remembered unavailable
+21:51:00.373  Wi-Fi P2P frameworkState=2
+21:51:00.382  Wi-Fi P2P existingGroup=false
+21:51:00.384  Wi-Fi P2P create mode=ALIGNED_5_GHZ frequencyMHz=5180
+21:51:00.504  Wi-Fi P2P startup stopped type=IOException
+21:51:00.509  Wi-Fi P2P remove rejected code=2 reason=Wi-Fi P2P is busy
+21:51:00.512  wireless bring-up failed: Could not establish WIFI_P2P hotspot: Unsupported Wi-Fi P2P security type: -1
+21:51:00.513  ERROR Could not establish WIFI_P2P hotspot: Unsupported Wi-Fi P2P security type: -1
+21:51:00.514  Failed: Could not establish WIFI_P2P hotspot: Unsupported Wi-Fi P2P security type: -1; retrying in 8000ms
+21:51:08.524  Reconnecting after Failed: Could not establish WIFI_P2P hotspot: Unsupported Wi-Fi P2P security type: -1
+21:51:08.539  CarPlay size=Default canvas=2112x1320
+21:51:08.544  Display request selected=Default percent=100 surface=2112x1320 resolution=100% base=2112x1320 candidate=2112x1320 fps=30 codec=H.264 softwareHevc=false
+21:51:08.545  Decoder capability enlargement check not required
+21:51:08.546  Display effective percent=100 canvas=2112x1320 decision=not_enlarging physical=300x188mm safeArea=AirPlayInsets(top=0, bottom=0, left=0, right=0) drawOutside=true
+21:51:08.549  Starting CarPlay controller at 2112x1320 -> 2112x1320 (1.0x) physical=300x188mm video=H.264 decoder=hardware microphone=true location=disabled mfi=Local offline
+21:51:08.552  mfi discovery backend=LocalOffline remoteFallback=disabled
+21:51:08.553  STEP mfi/start: preparing the configured MFi authentication provider
+21:51:08.564  STEP mfi/ready: MFi authentication provider is ready
+21:51:08.566  STEP wifi/ap: starting the wireless CarPlay access point
+21:51:08.568  wireless bring-up generation=1 starting
+21:51:08.569  Wi-Fi P2P preflight wifiEnabled=true locationEnabled=true permissionGranted=true locationAccessMode=unknown stationMHz=5180 stationState=COMPLETED reportedStationMHz=5180 fiveGhzSupported=true
+21:51:08.570  Wi-Fi P2P remembered unavailable
+21:51:08.571  Wi-Fi P2P frameworkState=2
+21:51:08.581  Wi-Fi P2P existingGroup=true
+21:51:08.583  Wi-Fi P2P reclaiming retained owned group
+21:51:08.785  Wi-Fi P2P create mode=ALIGNED_5_GHZ frequencyMHz=5180
+21:51:09.682  Wi-Fi P2P startup stopped type=IOException
+21:51:09.698  wireless bring-up failed: Could not establish WIFI_P2P hotspot: Unsupported Wi-Fi P2P security type: -1
+21:51:09.700  ERROR Could not establish WIFI_P2P hotspot: Unsupported Wi-Fi P2P security type: -1
+21:51:09.702  Failed: Could not establish WIFI_P2P hotspot: Unsupported Wi-Fi P2P security type: -1; retrying in 16000ms
+Activity destroyed
+--- diplay.log ---
+DiPlay log started 2026-10-01 21:51:17.070 pid=30587 path=/data/user/0/com.shihab.diplay/files/logs/diplay.log
+21:51:17.081  Host started; MFI target=Local offline; transport=wired
+21:51:17.124  Texture surface created
+21:51:17.626  Display detected: 2112x1320
+21:51:19.041  CarPlay size=Default canvas=2112x1320
+21:51:19.048  Display request selected=Default percent=100 surface=2112x1320 resolution=100% base=2112x1320 candidate=2112x1320 fps=30 codec=H.264 softwareHevc=false
+21:51:19.052  Decoder capability enlargement check not required
+21:51:19.054  Display effective percent=100 canvas=2112x1320 decision=not_enlarging physical=300x188mm safeArea=AirPlayInsets(top=0, bottom=0, left=0, right=0) drawOutside=true
+21:51:19.058  Starting CarPlay controller at 2112x1320 -> 2112x1320 (1.0x) physical=300x188mm video=H.264 decoder=hardware microphone=true location=disabled mfi=Local offline
+21:51:19.072  mfi discovery backend=LocalOffline remoteFallback=disabled
+21:51:19.082  STEP mfi/start: preparing the configured MFi authentication provider
+21:51:19.087  STEP mfi/ready: MFi authentication provider is ready
+21:51:19.089  STEP usb/discover: searching for an iPhone USB device
+21:51:19.097  STEP usb/wait: iPhone USB device not present; polling
+21:51:21.867  wired iPhone USB permission requested
+21:51:21.874  STEP usb/permission: requesting USB access to the iPhone
+21:51:23.087  wired iPhone USB permission requested
+21:51:29.828  wired iPhone USB permission requested
+21:51:30.449  wired iPhone USB permission requested
+21:51:38.761  wired iPhone USB permission already granted
+21:51:38.763  wired iPhone USB permission granted
+21:51:38.764  STEP usb/config: selecting the iPhone CarPlay configuration
+21:51:38.797  STEP usb/reenum: waiting for the CarPlay USB configuration
+21:51:39.261  wired iPhone USB permission requested
+21:51:39.280  STEP usb/permission: requesting USB access to the iPhone
+21:51:43.282  wired iPhone USB permission granted
+21:51:43.289  wired opening iPhone USB data paths
+21:51:43.296  STEP usb/config: selecting the iPhone CarPlay configuration
+21:51:43.300  STEP usb/data: opening iAP2 and NCM USB data paths
+21:51:43.543  ncm config=6 control=3/0 data=4/1 status=0x87 in=0x88 out=0x6
+21:51:43.604  wired USBMUX host opened
+21:51:43.604  STEP lockdown/pair: loading or creating the pairing record
+21:51:49.205  STEP lockdown/carkit: opening com.apple.carkit.service
+21:51:49.378  phone authentication diagnostic capture started
+21:51:49.513  wired com.apple.carkit.service stream opened
+21:51:49.516  wired iAP2 CSM channel opened
+21:51:49.518  ncm using hostMac=[address]
+21:51:49.519  STEP network/attach: attaching the AirPlay network transport
+21:51:49.533  wired link TX begin bytes=35
+21:51:49.535  wired link TX completed bytes=35
+21:51:49.537  wired VPN service bound; attaching NCM transport
+21:51:49.552  wired link RX bytes=6
+21:51:49.554  wired link RX bytes=29 length=29 flags=192 seq=127 ack=99 session=0
+21:51:49.568  wired link TX begin bytes=9 length=9 flags=64 seq=99 ack=127 session=0
+21:51:49.572  wired link TX completed bytes=9
+21:51:49.573  wired link RX bytes=16 length=16 flags=64 seq=128 ack=99 session=10
+21:51:49.595  wired VPN/NCM transport attach result=started
+21:51:49.596  wired NCM/VPN AirPlay transport attached
+21:51:49.597  STEP iap2/wired: wired iAP2 control loop running
+21:51:49.598  wired iAP2 control starting
+21:51:49.599  IAP2 READY [wired] ready=true
+21:51:49.673  wired link TX begin bytes=308 length=308 flags=64 seq=100 ack=128 session=10
+21:51:49.682  wired link TX completed bytes=308
+21:51:49.948  wired link RX bytes=16 length=16 flags=64 seq=129 ack=100 session=10
+21:51:49.948  wired link RX bytes=16 length=16 flags=64 seq=130 ack=100 session=10
+21:51:49.949  wired iap2 identification accepted
+21:51:50.049  wired link TX begin bytes=627 length=627 flags=64 seq=101 ack=130 session=10
+21:51:50.050  wired link TX completed bytes=627
+21:51:50.074  wired link RX bytes=52 length=52 flags=64 seq=131 ack=101 session=10
+21:51:50.075  wired iap2 mfi rx=0xaa02 challenge bytes=32
+21:51:50.081  mfi local signature count=1 digestBytes=32
+21:51:50.081  wired iap2 mfi tx=0xaa03 signature bytes=64
+21:51:50.175  wired link TX begin bytes=84 length=84 flags=64 seq=102 ack=131 session=10
+21:51:50.176  wired link TX completed bytes=84
+21:51:50.547  wired link RX bytes=16 length=16 flags=64 seq=132 ack=102 session=10
+21:51:50.548  wired iap2 mfi rx=0xaa05 authentication-succeeded
+21:51:50.548  wired iap2 authentication accepted
+21:51:50.549  wired iap2 power/subscriptions sent
+21:51:50.644  wired link RX bytes=54 length=54 flags=64 seq=133 ack=102 session=10
+21:51:50.645  wired link TX begin bytes=209 length=27 flags=64 seq=103 ack=133 session=10
+21:51:50.646  wired link TX completed bytes=209
+21:51:50.646  wired iap2 rx=0x4300 carplay-availability
+21:51:50.647  wired iap2 4300 wiredAvailable=true usbTransport=[identifier]
+21:51:50.647  wired iap2 tx=0x4301 carplay-start-session
+21:51:50.747  wired link TX begin bytes=143 length=143 flags=64 seq=109 ack=133 session=10
+21:51:50.748  wired link TX completed bytes=143
+21:51:50.862  wired link RX bytes=70 length=70 flags=64 seq=134 ack=104 session=10
+21:51:50.863  wired iap2 rx=0x5001
+21:51:50.877  wired link RX bytes=22 length=22 flags=64 seq=135 ack=104 session=12
+21:51:50.944  wired link RX bytes=22 length=22 flags=64 seq=136 ack=108 session=10
+21:51:50.945  wired link RX bytes=21 length=21 flags=64 seq=137 ack=109 session=10
+21:51:50.945  wired link RX bytes=21 length=21 flags=64 seq=138 ack=109 session=10
+21:51:50.946  wired iap2 rx=0xae01
+21:51:50.946  wired link RX bytes=38 length=38 flags=64 seq=139 ack=109 session=10
+21:51:50.946  wired iap2 rx=0xae01
+21:51:50.947  wired iap2 rx=0xae01
+21:51:50.947  wired iap2 rx=0x5001
+21:51:50.947  wired link RX bytes=43 length=43 flags=64 seq=140 ack=109 session=10
+21:51:50.948  wired iap2 rx=0x5001
+21:51:50.948  wired link RX bytes=25 length=25 flags=64 seq=141 ack=109 session=10
+21:51:50.949  wired iap2 rx=0x5001
+21:51:50.951  wired link RX bytes=22 length=22 flags=64 seq=142 ack=109 session=12
+21:51:50.952  wired link RX bytes=36 length=36 flags=64 seq=143 ack=109 session=10
+21:51:50.952  wired link RX bytes=21 length=21 flags=64 seq=144 ack=109 session=10
+21:51:50.953  wired iap2 rx=0x4158
+21:51:50.953  wired iap2 rx=0x4155
+21:51:51.394  TCP peer health enabled idle=10s interval=3s count=3 deadline=20000ms; no video-idle timeout
+21:51:51.523  wired link RX bytes=28 length=28 flags=64 seq=145 ack=109 session=10
+21:51:51.524  wired iap2 rx=0x5001
+21:51:51.553  wired link RX bytes=28 length=28 flags=64 seq=146 ack=109 session=10
+21:51:51.553  wired iap2 rx=0x5001
+21:51:51.577  wired link RX bytes=28 length=28 flags=64 seq=147 ack=109 session=10
+21:51:51.577  wired iap2 rx=0x5001
+21:51:51.632  airplay control encryption enabled
+21:51:51.649  mfi local signature count=2 digestBytes=32
+21:51:51.847  airplay SETUP keys=[deviceID, features, macAddress, model, name, osBuildVersion, osName, osVersion, sessionCorrelationUUID, sessionUUID, sourceVersion, statsCollectionEnabled, timingPort, updateSessionRequest]
+21:51:51.849  Phone display peer model=iPhone12,1 ios=27.0.1 airplay=980.77.1
+21:51:51.861  airplay event connection accepted from /[[ip]]:51119
+21:51:51.872  airplay /info displays=[{uuid=[identifier], type=110, maxFPS=30, widthPixels=2112, heightPixels=1320, widthPhysical=300, heightPhysical=188, features=10, primaryInputDevice=1, viewAreas=[{widthPixels=2112, heightPixels=1320, originXPixels=0, originYPixels=0, safeArea={widthPixels=2112, heightPixels=1320, originXPixels=0, originYPixels=0, drawUIOutsideSafeArea=true}}], initialViewArea=0}]
+21:51:51.934  AirPlay session active controller=[identifier] peer=[ip]
+21:51:51.936  AirPlay session active
+21:51:52.047  airplay command type=modesChanged keys=[appStates, resources]
+21:51:52.048  AirPlay command type=modesChanged params=appStates,resources
+21:51:52.793  airplay command type=disableBluetooth keys=[deviceID]
+21:51:52.794  AirPlay command type=disableBluetooth params=deviceID
+21:51:53.928  airplay command type=modesChanged keys=[appStates, resources]
+21:51:53.929  AirPlay command type=modesChanged params=appStates,resources
+21:51:53.936  airplay SETUP keys=[streams]
+21:51:53.952  airplay screen stream type=110 dataPort=39701
+21:51:53.952  airplay SETUP response streams=[{type=110, dataPort=39701}]
+21:51:54.435  Video: decoder=c2.exynos.h264.decoder mime=video/avc size=2112x1320
+21:51:54.436  Video recovery: requested keyframe sent=true
+21:51:54.482  Video: output format requested=2112x1320 coded=2112x1328 crop=0,0,2111,1319 stride=null slice=null color=86/1/2
+21:51:54.483  Video: first frame rendered
+21:51:57.701  wired link RX bytes=45 length=45 flags=64 seq=148 ack=109 session=10
+21:51:57.701  wired iap2 rx=0x5001
+21:51:57.702  wired link RX bytes=28 length=28 flags=64 seq=149 ack=109 session=10
+21:51:57.702  wired iap2 rx=0x5001
+21:51:57.703  wired link RX bytes=28 length=28 flags=64 seq=150 ack=109 session=10
+21:51:57.703  wired iap2 rx=0x5001
+21:51:58.964  Receive: video packets=138 bytes=8897752 readMaxMs=260 processMaxUs=16361 seqForwardGaps=0 lateOrDuplicate=0 interArrivalMaxMs=122 seqGapEvents=0 seqGapMax=0 seqGapLast=[none] seqGapAtMs=-1 ended=false
+21:51:59.213  Video: video stats rx=27.6fps shown=27.4fps maxGap=164ms kbps=14542 recoveries=0 touch2frame avg=29ms max=46ms n=15 touchSendMax=2ms
+21:52:00.801  wired link RX bytes=28 length=28 flags=64 seq=151 ack=109 session=10
+21:52:00.802  wired link RX bytes=113 length=113 flags=64 seq=152 ack=109 session=10
+21:52:00.803  wired iap2 rx=0x5001
+21:52:00.803  wired iap2 rx=0x5001
+21:52:01.299  wired link RX bytes=28 length=28 flags=64 seq=153 ack=109 session=10
+21:52:01.300  wired iap2 rx=0x5001
+21:52:01.323  wired link RX bytes=25 length=25 flags=64 seq=154 ack=109 session=10
+21:52:01.326  wired iap2 rx=0x5001
+21:52:01.327  wired link RX bytes=22 length=22 flags=64 seq=155 ack=109 session=12
+21:52:01.871  wired link RX bytes=28 length=28 flags=64 seq=156 ack=109 session=10
+21:52:01.872  wired iap2 rx=0x5001
+21:52:02.436  wired link RX bytes=28 length=28 flags=64 seq=157 ack=109 session=10
+21:52:02.439  wired iap2 rx=0x5001
+21:52:02.481  airplay command type=modesChanged keys=[appStates, resources]
+21:52:02.481  AirPlay command type=modesChanged params=appStates,resources
+21:52:03.031  wired link RX bytes=28 length=28 flags=64 seq=158 ack=109 session=10
+21:52:03.034  wired iap2 rx=0x5001
+21:52:03.058  wired link RX bytes=28 length=28 flags=64 seq=159 ack=109 session=10
+21:52:03.059  wired link RX bytes=25 length=25 flags=64 seq=160 ack=109 session=10
+21:52:03.060  wired iap2 rx=0x5001
+21:52:03.060  wired link RX bytes=22 length=22 flags=64 seq=161 ack=109 session=12
+21:52:03.061  wired iap2 rx=0x5001
+21:52:03.168  airplay command type=modesChanged keys=[appStates, resources]
+21:52:03.168  AirPlay command type=modesChanged params=appStates,resources
+21:52:03.232  airplay SETUP keys=[streams]
+21:52:03.237  Audio UDP receive buffer type=100 original=327680 requested=524288 actual=1048576
+21:52:03.239  airplay audio stream type=100 accepted=true dataPort=37668 controlPort=42435
+21:52:03.240  airplay SETUP response streams=[{type=100, dataPort=37668, controlPort=42435, streamConnectionID=17210382831919317205}]
+21:52:03.323  Audio: ready audioType=media codec=LPCM rate=48000 channels=2 route=usage bufferMs=500 startMs=300
+21:52:03.568  wired link RX bytes=33 length=33 flags=64 seq=162 ack=109 session=10
+21:52:03.569  wired iap2 rx=0x5001
+21:52:03.576  wired link RX bytes=42 length=42 flags=64 seq=163 ack=109 session=10
+21:52:03.580  wired iap2 rx=0x5001
+21:52:03.595  wired link RX bytes=28 length=28 flags=64 seq=164 ack=109 session=10
+21:52:03.611  wired iap2 rx=0x5001
+21:52:03.960  Receive: video packets=115 bytes=6082666 readMaxMs=794 processMaxUs=9606 seqForwardGaps=0 lateOrDuplicate=0 interArrivalMaxMs=794 seqGapEvents=0 seqGapMax=0 seqGapLast=[none] seqGapAtMs=-1 ended=false
+21:52:04.010  wired link RX bytes=28 length=28 flags=64 seq=165 ack=109 session=10
+21:52:04.012  wired iap2 rx=0x5001
+21:52:04.219  Video: video stats rx=22.0fps shown=22.0fps maxGap=1090ms kbps=9687 recoveries=0 touch2frame avg=25ms max=34ms n=12 touchSendMax=2ms
+21:52:04.329  wired link RX bytes=28 length=28 flags=64 seq=166 ack=109 session=10
+21:52:04.330  wired iap2 rx=0x5001
+21:52:04.333  wired link RX bytes=25 length=25 flags=64 seq=167 ack=109 session=10
+21:52:04.334  wired link RX bytes=22 length=22 flags=64 seq=168 ack=109 session=12
+21:52:04.334  wired iap2 rx=0x5001
+21:52:04.507  wired link RX bytes=28 length=28 flags=64 seq=169 ack=109 session=10
+21:52:04.508  wired iap2 rx=0x5001
+21:52:04.956  wired link RX bytes=28 length=28 flags=64 seq=170 ack=109 session=10
+21:52:04.965  wired iap2 rx=0x5001
+21:52:05.422  wired link RX bytes=28 length=28 flags=64 seq=171 ack=109 session=10
+21:52:05.424  wired iap2 rx=0x5001
+21:52:05.858  wired link RX bytes=28 length=28 flags=64 seq=172 ack=109 session=10
+21:52:05.863  wired iap2 rx=0x5001
+21:52:06.315  wired link RX bytes=28 length=28 flags=64 seq=173 ack=109 session=10
+21:52:06.315  wired iap2 rx=0x5001
+21:52:06.758  wired link RX bytes=28 length=28 flags=64 seq=174 ack=109 session=10
+21:52:06.760  wired iap2 rx=0x5001
+21:52:07.215  wired link RX bytes=28 length=28 flags=64 seq=175 ack=109 session=10
+21:52:07.218  wired iap2 rx=0x5001
+21:52:07.583  airplay command type=modesChanged keys=[appStates, resources]
+21:52:07.584  AirPlay command type=modesChanged params=appStates,resources
+21:52:07.679  wired link RX bytes=28 length=28 flags=64 seq=176 ack=109 session=10
+21:52:07.680  wired iap2 rx=0x5001
+21:52:08.136  wired link RX bytes=28 length=28 flags=64 seq=177 ack=109 session=10
+21:52:08.137  wired iap2 rx=0x5001
+21:52:08.242  Receive: audio type=100 packets=671 bytes=974292 readMaxMs=54 processMaxUs=5333 seqForwardGaps=0 lateOrDuplicate=0 interArrivalMaxMs=26 seqGapEvents=0 seqGapMax=0 seqGapLast=[none] seqGapAtMs=-1 ended=false
+21:52:08.334  audio stats audioType=media channel=MEDIA routeType=2 codec=LPCM trackState=1 playState=3 sampleRate=48000 trackBufferFrames=24000 rx=684 dropped=0 underruns=+0 queue=0 playing=true maxGapMs=26 sinceRxMs=0 maxWriteMs=120 writtenFrames=242136 totalWrittenFrames=242136 playbackHeadFrames=220800 playbackAdvanceFrames=-1 estimatedQueuedFrames=21336 writeErrors=0 lastWriteError=none zeroWrites=0 partialWrites=0 decoderDroppedTotal=0 outputBuffersTotal=0 rebuffers=0 ended=false
+21:52:08.471  wired link RX bytes=28 length=28 flags=64 seq=178 ack=109 session=10
+21:52:08.473  wired iap2 rx=0x5001
+21:52:08.583  wired link RX bytes=28 length=28 flags=64 seq=179 ack=109 session=10
+21:52:08.584  wired iap2 rx=0x5001
+21:52:08.957  Receive: video packets=147 bytes=6514546 readMaxMs=85 processMaxUs=11842 seqForwardGaps=0 lateOrDuplicate=0 interArrivalMaxMs=86 seqGapEvents=0 seqGapMax=0 seqGapLast=[none] seqGapAtMs=-1 ended=false
+21:52:09.032  wired link RX bytes=28 length=28 flags=64 seq=180 ack=109 session=10
+21:52:09.034  wired iap2 rx=0x5001
+21:52:09.220  Video: video stats rx=28.0fps shown=28.2fps maxGap=90ms kbps=10275 recoveries=0 touch2frame avg=29ms max=86ms n=20 touchSendMax=3ms
+21:52:09.291  wired link RX bytes=28 length=28 flags=64 seq=181 ack=109 session=10
+21:52:09.292  wired iap2 rx=0x5001
+21:52:09.486  wired link RX bytes=28 length=28 flags=64 seq=182 ack=109 session=10
+21:52:09.487  wired iap2 rx=0x5001
+21:52:09.929  wired link RX bytes=28 length=28 flags=64 seq=183 ack=109 session=10
+21:52:09.929  wired iap2 rx=0x5001
+21:52:10.153  airplay command type=modesChanged keys=[appStates, resources]
+21:52:10.154  AirPlay command type=modesChanged params=appStates,resources
+21:52:10.335  wired link RX bytes=33 length=33 flags=64 seq=184 ack=109 session=10
+21:52:10.338  wired iap2 rx=0x5001
+21:52:10.338  wired link RX bytes=28 length=28 flags=64 seq=185 ack=109 session=10
+21:52:10.340  wired iap2 rx=0x5001
+21:52:11.425  audio stats audioType=media channel=MEDIA routeType=2 codec=LPCM trackState=1 playState=3 sampleRate=48000 trackBufferFrames=24000 rx=419 dropped=0 underruns=+0 queue=0 playing=true maxGapMs=13 sinceRxMs=4 maxWriteMs=1 writtenFrames=148326 totalWrittenFrames=390462 playbackHeadFrames=368640 playbackAdvanceFrames=147840 estimatedQueuedFrames=21822 writeErrors=0 lastWriteError=none zeroWrites=0 partialWrites=0 decoderDroppedTotal=0 outputBuffersTotal=0 rebuffers=0 ended=true
+21:52:11.430  Receive: audio type=100 packets=432 bytes=627264 readMaxMs=13 processMaxUs=1992 seqForwardGaps=0 lateOrDuplicate=0 interArrivalMaxMs=13 seqGapEvents=0 seqGapMax=0 seqGapLast=[none] seqGapAtMs=-1 ended=true
+21:52:12.045  wired link RX bytes=28 length=28 flags=64 seq=186 ack=109 session=10
+21:52:12.047  wired iap2 rx=0x5001
+21:52:12.652  airplay command type=requestUI keys=[]
+21:52:12.653  CarPlay requested the car UI; opening the head-unit home screen
+21:52:12.679  AirPlay command type=requestUI params=
+21:52:13.968  Receive: video packets=136 bytes=4663298 readMaxMs=249 processMaxUs=18671 seqForwardGaps=0 lateOrDuplicate=0 interArrivalMaxMs=252 seqGapEvents=0 seqGapMax=0 seqGapLast=[none] seqGapAtMs=-1 ended=false
+21:52:14.225  Video: video stats rx=25.0fps shown=25.0fps maxGap=146ms kbps=7208 recoveries=0 touch2frame avg=28ms max=57ms n=11 touchSendMax=1ms
+21:52:18.974  Receive: video packets=44 bytes=2130827 readMaxMs=1001 processMaxUs=8877 seqForwardGaps=0 lateOrDuplicate=0 interArrivalMaxMs=1001 seqGapEvents=0 seqGapMax=0 seqGapLast=[none] seqGapAtMs=-1 ended=false
+21:52:19.227  Video: video stats rx=8.8fps shown=8.8fps maxGap=62ms kbps=3605 recoveries=0 touch2frame avg=190ms max=190ms n=1 touchSendMax=1ms
+21:52:23.391  airplay command type=modesChanged keys=[appStates, resources]
+21:52:23.391  AirPlay command type=modesChanged params=appStates,resources
+21:52:24.001  Receive: video packets=70 bytes=3244729 readMaxMs=999 processMaxUs=16093 seqForwardGaps=0 lateOrDuplicate=0 interArrivalMaxMs=999 seqGapEvents=0 seqGapMax=0 seqGapLast=[none] seqGapAtMs=-1 ended=false
+21:52:24.231  Video: video stats rx=13.2fps shown=13.2fps maxGap=747ms kbps=5281 recoveries=0 touch2frame avg=128ms max=253ms n=3 touchSendMax=1ms
+21:52:27.088  airplay command type=modesChanged keys=[appStates, resources]
+21:52:27.089  AirPlay command type=modesChanged params=appStates,resources
+21:52:29.002  Receive: video packets=145 bytes=6222334 readMaxMs=102 processMaxUs=20985 seqForwardGaps=0 lateOrDuplicate=0 interArrivalMaxMs=109 seqGapEvents=0 seqGapMax=0 seqGapLast=[none] seqGapAtMs=-1 ended=false
+21:52:29.233  Video: video stats rx=28.0fps shown=27.8fps maxGap=123ms kbps=10747 recoveries=0 touch2frame avg=28ms max=53ms n=25 touchSendMax=2ms
+21:52:34.039  Receive: video packets=137 bytes=9450461 readMaxMs=379 processMaxUs=11364 seqForwardGaps=0 lateOrDuplicate=0 interArrivalMaxMs=380 seqGapEvents=0 seqGapMax=0 seqGapLast=[none] seqGapAtMs=-1 ended=false
+21:52:34.236  Video: video stats rx=26.2fps shown=26.4fps maxGap=389ms kbps=14236 recoveries=0 touch2frame avg=41ms max=172ms n=15 touchSendMax=2ms
+21:52:35.772  airplay command type=modesChanged keys=[appStates, resources]
+21:52:35.773  AirPlay command type=modesChanged params=appStates,resources
+21:52:39.042  Receive: video packets=131 bytes=5969115 readMaxMs=787 processMaxUs=17413 seqForwardGaps=0 lateOrDuplicate=0 interArrivalMaxMs=788 seqGapEvents=0 seqGapMax=0 seqGapLast=[none] seqGapAtMs=-1 ended=false
+21:52:39.234  airplay command type=modesChanged keys=[appStates, resources]
+21:52:39.235  AirPlay command type=modesChanged params=appStates,resources
+21:52:39.238  Video: video stats rx=25.2fps shown=25.2fps maxGap=795ms kbps=9797 recoveries=0 touch2frame avg=29ms max=115ms n=28 touchSendMax=3ms
+21:52:44.069  Receive: video packets=116 bytes=6929874 readMaxMs=658 processMaxUs=15724 seqForwardGaps=0 lateOrDuplicate=0 interArrivalMaxMs=659 seqGapEvents=0 seqGapMax=0 seqGapLast=[none] seqGapAtMs=-1 ended=false
+21:52:44.238  Video: video stats rx=22.2fps shown=22.0fps maxGap=1012ms kbps=10703 recoveries=0 touch2frame avg=64ms max=241ms n=5 touchSendMax=1ms
+21:52:49.245  Video: video stats rx=3.8fps shown=4.0fps maxGap=34ms kbps=851 recoveries=0 touch2frame avg=-1ms max=0ms n=0 touchSendMax=0ms
+21:52:49.970  Receive: video packets=30 bytes=682116 readMaxMs=1003 processMaxUs=1340 seqForwardGaps=0 lateOrDuplicate=0 interArrivalMaxMs=1003 seqGapEvents=0 seqGapMax=0 seqGapLast=[none] seqGapAtMs=-1 ended=false
+21:52:54.005  phone authentication diagnostic capture ended: DeviceUnavailable
+21:52:54.006  IAP2 RX [wired] FAILED: Android could not queue USBMUX read request (api=36 endpoint=0x85(direction=128,type=2,maxPacket=512) timeoutMs=957 bufferBytes=65536)
+21:52:54.007  wired bring-up failed: Android could not queue USBMUX read request (api=36 endpoint=0x85(direction=128,type=2,maxPacket=512) timeoutMs=957 bufferBytes=65536)
+21:52:54.008  Receive: video packets=3 bytes=384 readMaxMs=1001 processMaxUs=11 seqForwardGaps=0 lateOrDuplicate=0 interArrivalMaxMs=1001 seqGapEvents=0 seqGapMax=0 seqGapLast=[none] seqGapAtMs=-1 ended=true
+21:52:54.037  AirPlay session ended peer=[ip]
+21:52:54.039  AirPlay session ended; reconnecting from scratch
+21:52:54.040  AirPlay session ended; retrying in 2000ms
+21:52:54.041  airplay event connection closed
+21:52:54.041  airplay control closing reason=control I/O failed: Socket closed activeStreams=[110]
+21:52:54.064  ERROR Android could not queue USBMUX read request (api=36 endpoint=0x85(direction=128,type=2,maxPacket=512) timeoutMs=957 bufferBytes=65536)
+21:52:56.043  Reconnecting after AirPlay session ended
+21:52:56.051  CarPlay size=Default canvas=2112x1320
+21:52:56.053  Display request selected=Default percent=100 surface=2112x1320 resolution=100% base=2112x1320 candidate=2112x1320 fps=30 codec=H.264 softwareHevc=false
+21:52:56.053  Decoder capability enlargement check not required
+21:52:56.053  Display effective percent=100 canvas=2112x1320 decision=not_enlarging physical=300x188mm safeArea=AirPlayInsets(top=0, bottom=0, left=0, right=0) drawOutside=true
+21:52:56.058  Starting CarPlay controller at 2112x1320 -> 2112x1320 (1.0x) physical=300x188mm video=H.264 decoder=hardware microphone=true location=disabled mfi=Local offline
+21:52:56.062  mfi discovery backend=LocalOffline remoteFallback=disabled
+21:52:56.067  STEP mfi/start: preparing the configured MFi authentication provider
+21:52:56.069  STEP mfi/ready: MFi authentication provider is ready
+21:52:56.069  STEP usb/discover: searching for an iPhone USB device
+21:52:56.070  STEP usb/wait: iPhone USB device not present; polling
