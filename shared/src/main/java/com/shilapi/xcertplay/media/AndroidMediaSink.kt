@@ -90,7 +90,14 @@ internal class AudioFocusCoordinator(
             manager?.requestAudioFocus(next) ?: AudioManager.AUDIOFOCUS_REQUEST_FAILED
         } catch (e: Throwable) {
             @Suppress("DEPRECATION")
-            val res = manager?.requestAudioFocus(listener, primary.attributes.usage, gain) ?: AudioManager.AUDIOFOCUS_REQUEST_FAILED
+            val streamType = when (primary.channel) {
+                AudioChannel.MEDIA -> AudioManager.STREAM_MUSIC
+                AudioChannel.PHONE -> AudioManager.STREAM_VOICE_CALL
+                AudioChannel.ASSISTANT -> AudioManager.STREAM_NOTIFICATION
+                AudioChannel.NAVIGATION -> AudioManager.STREAM_MUSIC
+            }
+            @Suppress("DEPRECATION")
+            val res = manager?.requestAudioFocus(listener, streamType, gain) ?: AudioManager.AUDIOFOCUS_REQUEST_FAILED
             requestObject = listener
             res
         }
