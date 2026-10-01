@@ -821,35 +821,53 @@ private class AudioRenderer(
                     "csd0=${aacAudioSpecificConfig().toHexString()}",
             )
         }
-                codec = try {
+        codec = try {
             var decoder = if (mime == MediaFormat.MIMETYPE_AUDIO_AAC && preferSoftwareAacDecoder) {
                 try {
                     MediaCodec.createByCodecName("OMX.google.aac.decoder")
-                } catch (e: Exception) {
-                    MediaCodec.createDecoderByType(mime)
+                } catch (e: Throwable) {
+                    try {
+                        // Fallback: find any software AAC decoder by name pattern
+                        val software = MediaCodecList(MediaCodecList.REGULAR_CODECS).codecInfos.firstOrNull {
+                            !it.isEncoder && mime in it.supportedTypes &&
+                                (it.name.startsWith("OMX.google.") || it.name.startsWith("c2.android."))
+                        }
+                        if (software != null) MediaCodec.createByCodecName(software.name)
+                        else MediaCodec.createDecoderByType(mime)
+                    } catch (_: Throwable) {
+                        MediaCodec.createDecoderByType(mime)
+                    }
                 }
             } else {
                 MediaCodec.createDecoderByType(mime)
             }
             var configured = false
-            
+
             if (mime == MediaFormat.MIMETYPE_AUDIO_AAC) {
+                // Try standard configuration with csd-0 (works on normal Android devices)
                 try {
-                    mediaFormat.setByteBuffer("csd-0", ByteBuffer.wrap(aacAudioSpecificConfig()))
-                    decoder.configure(mediaFormat, null, null, 0)
+                    val standardFormat = MediaFormat().apply {
+                        setString(MediaFormat.KEY_MIME, mime)
+                        setInteger(MediaFormat.KEY_SAMPLE_RATE, format.sampleRate)
+                        setInteger(MediaFormat.KEY_CHANNEL_COUNT, format.channels)
+                        setInteger(MediaFormat.KEY_MAX_INPUT_SIZE, 64 * 1024)
+                        setInteger(MediaFormat.KEY_IS_ADTS, 1)
+                        setByteBuffer("csd-0", ByteBuffer.wrap(aacAudioSpecificConfig()))
+                    }
+                    decoder.configure(standardFormat, null, null, 0)
                     configured = true
-                } catch (e: Exception) {
+                } catch (e: Throwable) {
+                    // MTK decoders reject ADTS + csd-0 together; retry with ADTS only
                     Log.w(TAG, "Standard AAC configure failed, retrying without csd-0 for MTK", e)
-                    decoder.release()
+                    try { decoder.release() } catch (_: Throwable) {}
                     decoder = MediaCodec.createDecoderByType(mime)
-                    mediaFormat.setByteBuffer("csd-0", null)
                 }
             }
-            
+
             if (!configured) {
                 decoder.configure(mediaFormat, null, null, 0)
             }
-            
+
             decoder.start()
             Log.i(TAG, "audio decoder configured mime=$mime name=${decoder.name}")
             decoder

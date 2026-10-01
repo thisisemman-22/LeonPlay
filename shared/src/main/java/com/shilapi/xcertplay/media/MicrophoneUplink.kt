@@ -146,7 +146,12 @@ internal class MicrophoneUplink(private val config: MicrophoneConfig) : Closeabl
         var filled = 0
         try {
             while (running.get()) {
-                val count = recorder.read(readBuffer, 0, readBuffer.size, AudioRecord.READ_BLOCKING)
+                val count = try {
+                    recorder.read(readBuffer, 0, readBuffer.size, AudioRecord.READ_BLOCKING)
+                } catch (_: Throwable) {
+                    // 4-arg read() is API 23+; fall back to blocking 3-arg version
+                    recorder.read(readBuffer, 0, readBuffer.size)
+                }
                 if (count < 0) {
                     if (running.get()) Log.e(TAG, "microphone read failed code=$count")
                     return
@@ -166,7 +171,7 @@ internal class MicrophoneUplink(private val config: MicrophoneConfig) : Closeabl
                     }
                 }
             }
-        } catch (error: Exception) {
+        } catch (error: Throwable) {
             if (running.get()) Log.e(TAG, "microphone capture failed", error)
         } finally {
             running.set(false)

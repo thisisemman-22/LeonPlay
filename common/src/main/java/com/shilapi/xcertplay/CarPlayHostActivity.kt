@@ -133,10 +133,10 @@ class CarPlayHostActivity : ComponentActivity() {
         remoteMfiServer = remoteMfiServer.trim().takeIf { it.isNotEmpty() },
         remoteMfiToken = remoteMfiToken.takeIf { it.isNotEmpty() },
         identification = Iap2IdentificationConfig(
-            name = "DiPlay",
+            name = "LeonPlay",
             modelIdentifier = normalizedModel(),
             manufacturer = normalizedManufacturer(),
-            serialNumber = "DIPLAY-" + DiPlayBootstrap.deviceId(airPlayIdentity).replace(":", ""),
+            serialNumber = "LEONPLAY-" + DiPlayBootstrap.deviceId(airPlayIdentity).replace(":", ""),
             firmwareVersion = "0.1.0",
             hardwareVersion = "1.0",
             carPlayUsbInterfaceNumber = 3,
@@ -145,8 +145,8 @@ class CarPlayHostActivity : ComponentActivity() {
             chargingConnectors = com.shilapi.xcertplay.hud.BydOutputSettings.chargingConnectors(this),
             vehicleSpeedEnabled = locationReportingEnabled && com.shilapi.xcertplay.hud.BydOutputSettings.wheelSpeedToIphone(this),
         ),
-        label = "DiPlay",
-        hostName = "diplay-" + DiPlayBootstrap.deviceId(airPlayIdentity).replace(":", "").lowercase(),
+        label = "LeonPlay",
+        hostName = "leonplay-" + DiPlayBootstrap.deviceId(airPlayIdentity).replace(":", "").lowercase(),
         hostMac = DiPlayBootstrap.deviceId(airPlayIdentity).split(":").map { it.toInt(16).toByte() }.toByteArray(),
         wirelessBluetoothDeviceAddress = DiPlayPreferences.phoneAddress(this),
         transport = if (wirelessEnabled) CarPlayTransport.WIRELESS else CarPlayTransport.WIRED,
@@ -2702,8 +2702,12 @@ class CarPlayHostActivity : ComponentActivity() {
         if (decoder == null) {
             CanvasSupport(false, "no_decoder", "Decoder capability mime=$mime result=no_decoder")
         } else {
-            val hardware = if (Build.VERSION.SDK_INT >= 29) decoder.isHardwareAccelerated
+            val hardware = try {
+                if (Build.VERSION.SDK_INT >= 29) decoder.isHardwareAccelerated
                 else !decoder.name.startsWith("OMX.google.") && !decoder.name.startsWith("c2.android.")
+            } catch (_: Throwable) {
+                !decoder.name.startsWith("OMX.google.") && !decoder.name.startsWith("c2.android.")
+            }
             val video = decoder.getCapabilitiesForType(mime).videoCapabilities
             val sizeSupported = video?.isSizeSupported(display.widthPixels, display.heightPixels) == true
             val rateSupported = sizeSupported && video?.areSizeAndRateSupported(
@@ -2723,7 +2727,7 @@ class CarPlayHostActivity : ComponentActivity() {
                     "alignment=${video?.widthAlignment}x${video?.heightAlignment} " +
                     "fpsRange=${video?.supportedFrameRates} result=$reason")
         }
-    } catch (error: Exception) {
+    } catch (error: Throwable) {
         CanvasSupport(false, "capability_query_${error.javaClass.simpleName}",
             "Decoder capability query failed error=${error.javaClass.simpleName}")
     }
@@ -2782,7 +2786,7 @@ class CarPlayHostActivity : ComponentActivity() {
         appendLog(support.details)
         appendLog(effectiveSummary)
         return AirPlayConfig(
-            deviceName = "DiPlay",
+            deviceName = "LeonPlay",
             deviceId = DiPlayBootstrap.deviceId(airPlayIdentity),
             btMac = DiPlayBluetooth.localAddress(this) ?: DiPlayBootstrap.deviceId(airPlayIdentity),
             sourceVersion = "950.7.1",
@@ -3071,7 +3075,7 @@ class CarPlayHostActivity : ComponentActivity() {
         sink = snapshot.sink
         CarPlayBackgroundSession.store(snapshot.controller, snapshot.sink, snapshot.width, snapshot.height, this) { completion ->
             runOnUiThread {
-                shutdown(false, "DiPlay disconnect", completion)
+                shutdown(false, "LeonPlay disconnect", completion)
                 finish()
             }
         }
@@ -3181,7 +3185,7 @@ class CarPlayHostActivity : ComponentActivity() {
         if (airPlayConfig.videoInCar) CarPlayVideo.attach(this, next)
         CarPlayBackgroundSession.store(next, renderer, size.width, size.height, this) { completion ->
             runOnUiThread {
-                shutdown(terminateProcess = false, reason = "DiPlay disconnect", completion = completion)
+                shutdown(terminateProcess = false, reason = "LeonPlay disconnect", completion = completion)
                 finish()
             }
         }
@@ -3570,7 +3574,7 @@ class CarPlayHostActivity : ComponentActivity() {
         val activeLog = SessionLogFile(logFile)
         runCatching {
             activeLog.reset(
-                "DiPlay log started " +
+                "LeonPlay log started " +
                     "${SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.US).format(Date())} " +
                     "pid=${Process.myPid()} path=${logFile.absolutePath}",
             )

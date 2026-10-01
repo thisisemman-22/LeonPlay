@@ -81,7 +81,7 @@ internal class AudioChannelPreview(private val onUnavailable: (Int) -> Unit) : C
                 Thread.sleep(120L)
             } catch (_: InterruptedException) {
                 Thread.currentThread().interrupt()
-            } catch (error: Exception) {
+            } catch (error: Throwable) {
                 Log.w(TAG, "Channel preview unavailable channel=$channel", error)
                 mainHandler.post {
                     if (!closed && generation.get() == request) onUnavailable(channel)

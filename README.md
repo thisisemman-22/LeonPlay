@@ -1,59 +1,54 @@
-# DiPlay
+# LeonPlay
 
-**CarPlay for compatible BYD Android head units.** Wired and wireless, with the familiar DiAuto interface. Independent app: `com.shihab.diplay`.
+**Wireless CarPlay for Android** - bring Apple CarPlay to any Android device, no wires needed.
 
-> **BYD support scope:** These projects focus on BYD cars. They may work on other brands, but other brands are unsupported and there are no plans to add support or fix brand-specific incompatibilities.
+LeonPlay is a wireless CarPlay receiver built on top of [DiPlay](https://github.com/nicedayzhu/DiPlay) (an open-source CarPlay receiver based on xcertplay, licensed under GPL-3.0). This fork adds improved hardware compatibility, audio fixes for MediaTek head units, and a refreshed UI.
 
-[Download & website](https://shihabal3amri.github.io/DiPlay/) · [Release](https://github.com/shihabal3amri/DiPlay/releases/tag/v0.2.8) · [Report a problem](https://github.com/shihabal3amri/DiPlay/issues/new/choose)
+## Features
 
-![DiPlay home](site/assets/home.png)
+- **Wireless CarPlay** - connect your iPhone to your Android device via Wi-Fi
+- **Universal Audio** - automatic codec fallback for maximum hardware compatibility
+- **Fine-tuning Controls** - software decoder toggles for audio (AAC) and video (HEVC)
+- **Works on Tablets & Head Units** - tested on standard Android tablets and AC8227L head units
+- **Custom Theme** - warm amber on charcoal dark UI
 
-## 0.2.8 — public preview
+## Tested Hardware
 
-Install on the **car**, not the iPhone. No jailbreak, dongle, Mac, account or authentication server is required for use. Core CarPlay does not require ADB; optional dashboard, battery, wheel-speed and parked-video features do. Your head unit must permit APK installation. Wireless supports Wi-Fi Direct or the car’s existing hotspot; Wi-Fi Direct requires Android 10+; the APK supports Android 9+ for wired use.
+| Device | Platform | Android | Status |
+|--------|----------|---------|--------|
+| AC8227L Head Unit | ARMv7 (MT632L) | 13 (spoofed, API 27) | Working |
+| Android Tablet | ARM64 | 13+ | Working |
 
-- Wired USB and wireless CarPlay with local authentication.
-- BYD HUD navigation with arrows, distance and street names on verified firmware.
-- Car hotspot support, improved audio buffering and saved receive diagnostics.
-- Automatic address discovery, fixed-channel Wi-Fi fallbacks and successful-configuration memory.
-- Icon/text size, resolution and frame rate; applying a display change reconnects CarPlay.
-- Local diagnostic export. Reports are sent only if you choose to share them.
-- Separate installation alongside DiAuto. Run one projection app at a time.
+## Building
 
-This is **not an Apple-certified product**. The APK bundles an experimental accessory identity recovered from public Carlinkit firmware, not a newly provisioned MFi identity for DiPlay. A bundled private key is extractable. Acceptance after future iOS updates, reliability across head units and suitability of that identity for general distribution are unresolved. This release invites community testing; it is not a guarantee of universal compatibility.
+```bash
+# Set required environment variables
+export DIPLAY_AUTH_ASSETS_DIR=/path/to/auth/assets
+export JAVA_HOME=/path/to/jdk21
+export ANDROID_HOME=/path/to/android-sdk
 
-Earlier releases were tested on the development DiLink5.1 car: live windshield guidance and street names work, Car hotspot now starts CarPlay, and Wi-Fi Direct performance is substantially improved. Occasional audio cutouts remain and are deferred to a later update. The new features were tested on a BYD Tang with DiLink 5.0 and an iPhone 15 Pro on iOS 27; wheel-speed dead reckoning in tunnels remains unverified. Broader head-unit and iOS compatibility is not guaranteed. The HUD firmware scope and cleanup limits are documented in [BYD navigation](docs/BYD_NAVIGATION.md).
+# Build standalone debug APK
+./gradlew :mobile:assembleStandaloneDebug
+```
 
-## What’s new in 0.2.8
+The APK will be at `mobile/build/outputs/apk/debug/mobile-debug.apk`.
 
-- App interface in English, Simplified Chinese, Arabic, Russian and Spanish; synchronized Android app-language settings.
-- Steering-wheel media controls and long-press Siri on supported BYD firmware while CarPlay is on screen.
-- Dashboard display choices: map, turn card, or both; corrected dashboard keyframe recovery.
-- Optional ADB feature on supported DiLink 5.0: pause the dashboard map stream when its display mode hides the map.
-- Optional ADB battery reporting for Apple Maps, with warning threshold, charging-connector selection and a checked reconnect action.
-- Wireless location reporting continues across the Bluetooth-to-Wi-Fi handoff; USB and wireless updates are limited to one per second.
-- Optional ADB wheel-speed and gear reporting lets iPhone navigation estimate movement when GPS is unavailable. Tunnel use still needs validation.
-- Optional iOS 27 video playback on the car screen while parked, with iPhone, touchscreen and steering-wheel controls. Playback closes when the car leaves P.
-- DRM-protected video such as Apple TV+ is not supported; DiPlay is not a licensed FairPlay receiver. Netflix does not support AirPlay.
+## Audio Troubleshooting
 
-## Documentation
+If audio doesn't work on your device, go to **Settings > Display and performance** and try:
 
-- [Install and connect](docs/INSTALL.md)
-- [Compatibility and troubleshooting](docs/COMPATIBILITY.md)
-- [Privacy and diagnostic reports](docs/PRIVACY.md)
-- [Build from source](docs/BUILD.md)
-- [Validation](docs/VALIDATION.md)
-- [Release notes](CHANGELOG.md)
-- [Credits and licenses](docs/THIRD_PARTY_NOTICES.md)
+1. **Software AAC decoder** - forces Google's software AAC decoder instead of the hardware one. Fixes audio on buggy MediaTek units.
+2. **Software HEVC decoder** - forces software HEVC video decoding.
+3. **Music buffer** - increase to 500ms or 1000ms for more stable audio on slow devices.
 
-The website is available in English, Arabic, Russian, Spanish and Simplified Chinese. The app interface supports those same five languages. Choose the app language in Settings; on Android 13+, it stays synchronized with Android’s per-app language setting.
+The app automatically tries the standard audio configuration first, and falls back to a MediaTek-compatible mode if it fails.
 
-## Source and credits
+## Credits
 
-Based on [xcertplay](https://github.com/shilapi/xcertplay), GPL-3.0. The home/settings UI and website adapt [DiAuto](https://github.com/shihabal3amri/DiAuto), AGPL-3.0; that license is included in `docs/licenses`. Preserve those notices when distributing modifications. CarPlay and its icon belong to Apple Inc.; no Apple or BYD affiliation or endorsement is implied.
+- **[DiPlay](https://github.com/nicedayzhu/DiPlay)** by Shihab Al-Amri - the open-source CarPlay receiver that serves as the foundation for this project
+- **xcertplay** - the underlying CarPlay protocol engine (GPL-3.0)
+- Built by [@thisisemman-22](https://github.com/thisisemman-22)
 
-This repository starts with a clean public source snapshot. Local research, tester reports and release-signing secrets are excluded. The complete source corresponding to the APK is provided with every release; experimental runtime identity assets are described separately in the build instructions and notices.
+## License
 
-## Local release packaging
-
-The release APK intentionally contains the experimental accessory identity. The Git repository and source archive exclude all accessory and Android signing keys; tests generate synthetic identities at runtime. Source/CI builds omit runtime identity assets by default. Local release builds explicitly select an external asset directory. Publishing the APK makes its bundled identity extractable; building locally does not preserve that identity's confidentiality.
+This project inherits the GPL-3.0 license from its upstream dependencies.
