@@ -320,6 +320,7 @@ class AndroidMediaSink(
             audioFocusCoordinator,
             navigationStreamType,
             mediaBufferMillis,
+            preferSoftwareAacDecoder,
             onAudioDiagnostic,
         ).also { audioRenderers[id] = it }
     }
@@ -694,6 +695,7 @@ private class AudioRenderer(
     private val audioFocusCoordinator: AudioFocusCoordinator,
     private val navigationStreamType: Int,
     private val mediaBufferMillis: Int,
+    private val preferSoftwareAacDecoder: Boolean,
     private val report: (String) -> Unit,
 ) : Closeable {
     private data class AudioPacket(val rtp: ByteArray, val sample: Int)
@@ -1411,6 +1413,9 @@ private class AudioRenderer(
         const val DECODED_BUFFER_LOG_INTERVAL = 50
     }
 }
+
+
+
 
 
 
