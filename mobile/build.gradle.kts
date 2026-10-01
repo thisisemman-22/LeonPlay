@@ -17,8 +17,8 @@ android {
         applicationId = "com.shihab.diplay"
         minSdk = 27
         targetSdk = 37
-        versionCode = 28
-        versionName = "0.2.8-tablet2-api27"
+        versionCode = 30
+        versionName = "1.0.0-leonplay"
 
     }
 
@@ -39,7 +39,7 @@ android {
 
     buildTypes {
         debug {
-            applicationIdSuffix = ".tablettest"
+            applicationIdSuffix = ".leonplay"
             versionNameSuffix = ""
         }
         release {

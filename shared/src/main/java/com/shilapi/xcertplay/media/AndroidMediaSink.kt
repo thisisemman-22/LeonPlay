@@ -805,7 +805,6 @@ private class AudioRenderer(
             setInteger(MediaFormat.KEY_MAX_INPUT_SIZE, 64 * 1024)
             if (mime == MediaFormat.MIMETYPE_AUDIO_AAC) {
                 setInteger(MediaFormat.KEY_IS_ADTS, 1)
-                setByteBuffer("csd-0", ByteBuffer.wrap(aacAudioSpecificConfig()))
             } else {
                 setByteBuffer("csd-0", ByteBuffer.wrap(opusHead()))
                 setByteBuffer("csd-1", ByteBuffer.wrap(opusCodecDelay()))
@@ -825,7 +824,7 @@ private class AudioRenderer(
                 it.start()
                 Log.i(TAG, "audio decoder configured mime=$mime name=${it.name}")
             }
-        } catch (error: Exception) {
+        } catch (error: Throwable) {
             Log.e(TAG, "audio decoder configuration failed mime=$mime", error)
             null
         }
@@ -906,7 +905,7 @@ private class AudioRenderer(
             )
         }
         track = built
-        trackAttributes = built.audioAttributes
+        trackAttributes = try { built.audioAttributes } catch (e: Throwable) { audioAttributesFor(selection) }
         val capacityBytes = try { built.bufferSizeInFrames * frameBytes } catch (e: Throwable) { plan.trackBufferBytes }
         startThresholdBytes = MediaAudioBuffer.startBytesFor(plan.startBytes, capacityBytes, PREBUFFER_WRITE_CHUNK_BYTES)
         report("Audio: ready audioType=${format.audioType} codec=${format.codec} " +

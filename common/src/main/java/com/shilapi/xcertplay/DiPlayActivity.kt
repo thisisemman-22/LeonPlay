@@ -1197,12 +1197,12 @@ class DiPlayActivity : ComponentActivity() {
     private fun space(height: Int) = View(this).apply { layoutParams = LinearLayout.LayoutParams(1, dp(height)) }
     private fun dp(value: Int) = (value * resources.displayMetrics.density).toInt()
     companion object {
-        private val BG = Color.rgb(12, 17, 27)
-        private val SURFACE = Color.rgb(21, 30, 44)
-        private val BORDER = Color.rgb(42, 56, 75)
-        private val ACCENT = Color.rgb(166, 200, 255)
-        private val TEXT = Color.rgb(241, 245, 252)
-        private val MUTED = Color.rgb(168, 182, 202)
-        private val WARNING = Color.rgb(255, 196, 128)
+        private val BG = Color.rgb(13, 13, 13)
+        private val SURFACE = Color.rgb(26, 26, 26)
+        private val BORDER = Color.rgb(51, 51, 51)
+        private val ACCENT = Color.rgb(255, 183, 77)
+        private val TEXT = Color.rgb(245, 245, 245)
+        private val MUTED = Color.rgb(158, 158, 158)
+        private val WARNING = Color.rgb(255, 112, 67)
     }
 }
