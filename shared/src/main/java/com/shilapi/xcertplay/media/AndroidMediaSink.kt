@@ -907,7 +907,7 @@ private class AudioRenderer(
         }
         track = built
         trackAttributes = built.audioAttributes
-        val capacityBytes = built.bufferSizeInFrames * frameBytes
+        val capacityBytes = try { built.bufferSizeInFrames * frameBytes } catch (e: Throwable) { plan.trackBufferBytes }
         startThresholdBytes = MediaAudioBuffer.startBytesFor(plan.startBytes, capacityBytes, PREBUFFER_WRITE_CHUNK_BYTES)
         report("Audio: ready audioType=${format.audioType} codec=${format.codec} " +
             "rate=${format.sampleRate} channels=${format.channels} " +
@@ -1107,75 +1107,83 @@ private class AudioRenderer(
         (sample.toLong() and 0xffff_ffffL) * 1_000_000L / format.sampleRate
 
     private fun feedCodec(payload: ByteArray, presentationTimeUs: Long) {
-        val codec = codec ?: return
-        val index = codec.dequeueInputBuffer(INPUT_TIMEOUT_US)
-        if (index < 0) {
-            inputDropped++
-            if (inputDropped == 1) {
-                Log.w(
-                    TAG,
-                    "audio decoder input unavailable codec=${format.codec} " +
-                        "queued=$inputQueued dropped=$inputDropped",
-                )
+        try {
+            val codec = codec ?: return
+            val index = codec.dequeueInputBuffer(INPUT_TIMEOUT_US)
+            if (index < 0) {
+                inputDropped++
+                if (inputDropped == 1) {
+                    Log.w(
+                        TAG,
+                        "audio decoder input unavailable codec=${format.codec} " +
+                            "queued=$inputQueued dropped=$inputDropped",
+                    )
+                }
+                return
             }
-            return
-        }
-        val input = codec.getInputBuffer(index) ?: return
-        input.clear()
-        if (payload.size <= input.remaining()) {
-            input.put(payload)
-            codec.queueInputBuffer(index, 0, payload.size, presentationTimeUs, 0)
-            inputQueued++
-            if (!firstInputQueuedLogged) {
-                firstInputQueuedLogged = true
-                Log.i(
-                    TAG,
-                    "audio decoder first input codec=${format.codec} bytes=${payload.size} " +
-                        "head=${payload.copyOf(minOf(payload.size, 16)).toHexString()}",
-                )
+            val input = codec.getInputBuffer(index) ?: return
+            input.clear()
+            if (payload.size <= input.remaining()) {
+                input.put(payload)
+                codec.queueInputBuffer(index, 0, payload.size, presentationTimeUs, 0)
+                inputQueued++
+                if (!firstInputQueuedLogged) {
+                    firstInputQueuedLogged = true
+                    Log.i(
+                        TAG,
+                        "audio decoder first input codec=${format.codec} bytes=${payload.size} " +
+                            "head=${payload.copyOf(minOf(payload.size, 16)).toHexString()}",
+                    )
+                }
+            } else {
+                codec.queueInputBuffer(index, 0, 0, 0, 0)
+                inputDropped++
             }
-        } else {
-            codec.queueInputBuffer(index, 0, 0, 0, 0)
-            inputDropped++
+            drainCodec(codec)
+        } catch (e: Throwable) {
+            Log.e(TAG, "feedCodec error", e)
         }
-        drainCodec(codec)
     }
 
     private fun drainCodec(codec: MediaCodec) {
-        val info = MediaCodec.BufferInfo()
-        while (running) {
-            val index = codec.dequeueOutputBuffer(info, 0)
-            when {
-                index == MediaCodec.INFO_TRY_AGAIN_LATER -> return
-                index == MediaCodec.INFO_OUTPUT_FORMAT_CHANGED -> Unit
-                index >= 0 -> {
-                    val size = info.size
-                    if (size > 0) {
-                        outputBuffers++
-                        if (outputBuffers == 1 || outputBuffers % DECODED_BUFFER_LOG_INTERVAL == 0) {
-                            Log.i(
-                                TAG,
-                                "audio decoder output codec=${format.codec} " +
-                                    "buffers=$outputBuffers bytes=$size " +
-                                    "queued=$inputQueued dropped=$inputDropped",
-                            )
+        try {
+            val info = MediaCodec.BufferInfo()
+            while (running) {
+                val index = codec.dequeueOutputBuffer(info, 0)
+                when {
+                    index == MediaCodec.INFO_TRY_AGAIN_LATER -> return
+                    index == MediaCodec.INFO_OUTPUT_FORMAT_CHANGED -> Unit
+                    index >= 0 -> {
+                        val size = info.size
+                        if (size > 0) {
+                            outputBuffers++
+                            if (outputBuffers == 1 || outputBuffers % DECODED_BUFFER_LOG_INTERVAL == 0) {
+                                Log.i(
+                                    TAG,
+                                    "audio decoder output codec=${format.codec} " +
+                                        "buffers=$outputBuffers bytes=$size " +
+                                        "queued=$inputQueued dropped=$inputDropped",
+                                )
+                            }
                         }
-                    }
-                    if (size > 0) {
-                        val output = codec.getOutputBuffer(index)
-                        if (output != null) {
-                            if (size > pcm.size) pcm = ByteArray(size)
-                            output.position(info.offset)
-                            output.limit(info.offset + size)
-                            output.get(pcm, 0, size)
-                            writePcm(pcm, 0, size)
+                        if (size > 0) {
+                            val output = codec.getOutputBuffer(index)
+                            if (output != null) {
+                                if (size > pcm.size) pcm = ByteArray(size)
+                                output.position(info.offset)
+                                output.limit(info.offset + size)
+                                output.get(pcm, 0, size)
+                                writePcm(pcm, 0, size)
+                            }
                         }
+                        codec.releaseOutputBuffer(index, false)
+                        if (info.flags and MediaCodec.BUFFER_FLAG_END_OF_STREAM != 0) return
                     }
-                    codec.releaseOutputBuffer(index, false)
-                    if (info.flags and MediaCodec.BUFFER_FLAG_END_OF_STREAM != 0) return
+                    else -> return
                 }
-                else -> return
             }
+        } catch (e: Throwable) {
+            Log.e(TAG, "drainCodec error", e)
         }
     }
 
@@ -1202,7 +1210,11 @@ private class AudioRenderer(
                 minOf(length - written, PREBUFFER_WRITE_CHUNK_BYTES)
             }
             val writeStarted = System.nanoTime()
-            val count = track.write(data, offset + written, writeLength, AudioTrack.WRITE_BLOCKING)
+            val count = try {
+                track.write(data, offset + written, writeLength, AudioTrack.WRITE_BLOCKING)
+            } catch (e: Throwable) {
+                track.write(data, offset + written, writeLength)
+            }
             maxWriteMs = maxOf(maxWriteMs, (System.nanoTime() - writeStarted) / 1_000_000L)
             if (count < 0) {
                 writeErrorsThisWindow++
@@ -1271,10 +1283,10 @@ private class AudioRenderer(
         }
         val queuedFrames = playbackHeadFrames?.let { (totalWrittenFrames - it).coerceAtLeast(0L) }
         val line = "audio stats audioType=${format.audioType} channel=$mappedChannel " +
-            "routeType=${currentTrack?.routedDevice?.type ?: -1} codec=${format.codec} " +
+            "routeType=${try { currentTrack?.routedDevice?.type } catch (e: Throwable) { -1 } ?: -1} codec=${format.codec} " +
             "trackState=${currentTrack?.state ?: -1} playState=${currentTrack?.playState ?: -1} " +
             "sampleRate=${currentTrack?.sampleRate ?: format.sampleRate} " +
-            "trackBufferFrames=${currentTrack?.bufferSizeInFrames ?: -1} " +
+            "trackBufferFrames=${try { currentTrack?.bufferSizeInFrames } catch (e: Throwable) { -1 } ?: -1} " +
             "rx=${packetsReceived.getAndSet(0)} " +
             "dropped=${packetsDropped.getAndSet(0)} underruns=+${underruns - statsLastUnderruns} queue=${queue.size} " +
             "playing=$playbackStarted maxGapMs=${maxArrivalGapMs.getAndSet(0)} " +
