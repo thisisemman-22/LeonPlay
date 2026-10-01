@@ -2,7 +2,6 @@ package com.shilapi.xcertplay.media
 
 import android.content.Context
 import android.media.AudioAttributes
-import android.media.AudioFocusRequest
 import android.media.AudioFormat as AndroidAudioFormat
 import android.media.AudioManager
 import android.media.AudioTrack
@@ -41,7 +40,7 @@ internal class AudioFocusCoordinator(
 
     private val manager = context?.getSystemService(Context.AUDIO_SERVICE) as? AudioManager
     private val active = LinkedHashMap<AudioTrack, Entry>()
-    private var request: AudioFocusRequest? = null
+    private var requestObject: Any? = null
     private var requestedChannel: AudioChannel? = null
     private val listener = AudioManager.OnAudioFocusChangeListener { change ->
         synchronized(this) {
@@ -70,29 +69,50 @@ internal class AudioFocusCoordinator(
     private fun refreshRequest() {
         val primary = active.values.maxByOrNull { it.channel.focusPriority() }
         if (primary == null) {
-            request?.let { manager?.abandonAudioFocusRequest(it) }
-            request = null
+            abandonFocus()
             requestedChannel = null
             return
         }
-        if (request != null && requestedChannel == primary.channel) return
-        request?.let { manager?.abandonAudioFocusRequest(it) }
+        if (requestObject != null && requestedChannel == primary.channel) return
+        abandonFocus()
         val gain = when (primary.channel) {
             AudioChannel.MEDIA -> AudioManager.AUDIOFOCUS_GAIN
             AudioChannel.PHONE -> AudioManager.AUDIOFOCUS_GAIN_TRANSIENT
             AudioChannel.ASSISTANT -> AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK
             AudioChannel.NAVIGATION -> return
         }
-        val next = AudioFocusRequest.Builder(gain)
-            .setAudioAttributes(primary.attributes)
-            .setOnAudioFocusChangeListener(listener, Handler(Looper.getMainLooper()))
-            .build()
-        request = next
+        val result: Int = try {
+            val next = android.media.AudioFocusRequest.Builder(gain)
+                .setAudioAttributes(primary.attributes)
+                .setOnAudioFocusChangeListener(listener, Handler(Looper.getMainLooper()))
+                .build()
+            requestObject = next
+            manager?.requestAudioFocus(next) ?: AudioManager.AUDIOFOCUS_REQUEST_FAILED
+        } catch (e: Throwable) {
+            @Suppress("DEPRECATION")
+            val res = manager?.requestAudioFocus(listener, primary.attributes.usage, gain) ?: AudioManager.AUDIOFOCUS_REQUEST_FAILED
+            requestObject = listener
+            res
+        }
         requestedChannel = primary.channel
-        val result = manager?.requestAudioFocus(next)
         val line = "Audio: focus requested channel=${primary.channel} gain=$gain granted=$result activeTracks=${active.size}"
         Log.i(TAG, line)
         runCatching { report(line) }
+    }
+
+
+    private fun abandonFocus() {
+        try {
+            (requestObject as? android.media.AudioFocusRequest)?.let { manager?.abandonAudioFocusRequest(it) }
+        } catch (e: Throwable) {
+            @Suppress("DEPRECATION")
+            manager?.abandonAudioFocus(listener)
+        }
+        if (requestObject === listener) {
+            @Suppress("DEPRECATION")
+            manager?.abandonAudioFocus(listener)
+        }
+        requestObject = null
     }
 
     private fun setVolume(volume: Float) {
@@ -833,12 +853,24 @@ private class AudioRenderer(
         if (streamOverride == 0) {
             val attributes = audioAttributesFor(selection)
             routeLabel = "usage"
-            built = AudioTrack.Builder()
-                .setAudioAttributes(attributes)
-                .setAudioFormat(pcmFormat(encoding, channelMask))
-                .setTransferMode(AudioTrack.MODE_STREAM)
-                .setBufferSizeInBytes(plan.trackBufferBytes)
-                .build()
+            built = try {
+                AudioTrack.Builder()
+                    .setAudioAttributes(attributes)
+                    .setAudioFormat(pcmFormat(encoding, channelMask))
+                    .setTransferMode(AudioTrack.MODE_STREAM)
+                    .setBufferSizeInBytes(plan.trackBufferBytes)
+                    .build()
+            } catch (e: Throwable) {
+                @Suppress("DEPRECATION")
+                AudioTrack(
+                    AudioManager.STREAM_MUSIC,
+                    format.sampleRate,
+                    channelMask,
+                    encoding,
+                    plan.trackBufferBytes,
+                    AudioTrack.MODE_STREAM
+                )
+            }
         } else {
             val streamType = streamOverride
             routeLabel = "streamType=$streamType"
@@ -852,12 +884,24 @@ private class AudioRenderer(
                 createFallback = {
                     routeLabel = "streamType=$streamType(fallback=usage)"
                     Log.w(TAG, "streamType=$streamType rejected by this ROM; falling back to usage-based track")
-                    AudioTrack.Builder()
-                        .setAudioAttributes(audioAttributesFor(selection))
-                        .setAudioFormat(pcmFormat(encoding, channelMask))
-                        .setTransferMode(AudioTrack.MODE_STREAM)
-                        .setBufferSizeInBytes(plan.trackBufferBytes)
-                        .build()
+                    try {
+                        AudioTrack.Builder()
+                            .setAudioAttributes(audioAttributesFor(selection))
+                            .setAudioFormat(pcmFormat(encoding, channelMask))
+                            .setTransferMode(AudioTrack.MODE_STREAM)
+                            .setBufferSizeInBytes(plan.trackBufferBytes)
+                            .build()
+                    } catch (e: Throwable) {
+                        @Suppress("DEPRECATION")
+                        AudioTrack(
+                            AudioManager.STREAM_MUSIC,
+                            format.sampleRate,
+                            channelMask,
+                            encoding,
+                            plan.trackBufferBytes,
+                            AudioTrack.MODE_STREAM
+                        )
+                    }
                 },
             )
         }

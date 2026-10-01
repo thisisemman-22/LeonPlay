@@ -77,11 +77,23 @@ internal class MicrophoneUplink(private val config: MicrophoneConfig) : Closeabl
                 )
                 .setBufferSizeInBytes(bufferSize)
                 .build()
-        } catch (error: Exception) {
-            Log.e(TAG, "microphone recorder creation failed", error)
-            nextEncoder?.close()
-            running.set(false)
-            return false
+        } catch (error: Throwable) {
+            Log.w(TAG, "falling back to legacy AudioRecord", error)
+            try {
+                @Suppress("DEPRECATION")
+                android.media.AudioRecord(
+                    source,
+                    config.sampleRate,
+                    channelMask,
+                    AndroidAudioFormat.ENCODING_PCM_16BIT,
+                    bufferSize
+                )
+            } catch (e2: Throwable) {
+                Log.e(TAG, "legacy microphone recorder creation failed", e2)
+                nextEncoder?.close()
+                running.set(false)
+                return false
+            }
         }
         if (nextRecorder.state != AudioRecord.STATE_INITIALIZED) {
             Log.w(TAG, "microphone recorder failed to initialize")
