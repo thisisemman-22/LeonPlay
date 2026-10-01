@@ -145,6 +145,7 @@ class AndroidMediaSink(
     private val videoWidth: Int = 1280,
     private val videoHeight: Int = 720,
     private val preferSoftwareHevcDecoder: Boolean = false,
+    private val preferSoftwareAacDecoder: Boolean = false,
     private val advancedAudioChannelMapping: Boolean = false,
     private val audioFocusEnabled: Boolean = false,
     private val mediaChannel: Int = 0,
@@ -818,12 +819,38 @@ private class AudioRenderer(
                     "csd0=${aacAudioSpecificConfig().toHexString()}",
             )
         }
-        codec = try {
-            MediaCodec.createDecoderByType(mime).also {
-                it.configure(mediaFormat, null, null, 0)
-                it.start()
-                Log.i(TAG, "audio decoder configured mime=$mime name=${it.name}")
+                codec = try {
+            var decoder = if (mime == MediaFormat.MIMETYPE_AUDIO_AAC && preferSoftwareAacDecoder) {
+                try {
+                    MediaCodec.createByCodecName("OMX.google.aac.decoder")
+                } catch (e: Exception) {
+                    MediaCodec.createDecoderByType(mime)
+                }
+            } else {
+                MediaCodec.createDecoderByType(mime)
             }
+            var configured = false
+            
+            if (mime == MediaFormat.MIMETYPE_AUDIO_AAC) {
+                try {
+                    mediaFormat.setByteBuffer("csd-0", ByteBuffer.wrap(aacAudioSpecificConfig()))
+                    decoder.configure(mediaFormat, null, null, 0)
+                    configured = true
+                } catch (e: Exception) {
+                    Log.w(TAG, "Standard AAC configure failed, retrying without csd-0 for MTK", e)
+                    decoder.release()
+                    decoder = MediaCodec.createDecoderByType(mime)
+                    mediaFormat.setByteBuffer("csd-0", null)
+                }
+            }
+            
+            if (!configured) {
+                decoder.configure(mediaFormat, null, null, 0)
+            }
+            
+            decoder.start()
+            Log.i(TAG, "audio decoder configured mime=$mime name=${decoder.name}")
+            decoder
         } catch (error: Throwable) {
             Log.e(TAG, "audio decoder configuration failed mime=$mime", error)
             null
@@ -1384,3 +1411,6 @@ private class AudioRenderer(
         const val DECODED_BUFFER_LOG_INTERVAL = 50
     }
 }
+
+
+

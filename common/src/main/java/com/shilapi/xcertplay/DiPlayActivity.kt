@@ -269,6 +269,8 @@ class DiPlayActivity : ComponentActivity() {
             }
             choice(card, getString(R.string.frame_rate), listOf(getString(R.string.s_30_fps_lighter_load), getString(R.string.s_60_fps_smoother_motion)), if (AirPlayPersistence.loadFps(this) == 60) 1 else 0) { AirPlayPersistence.saveFps(this, if (it == 1) 60 else 30) }
             toggle(card, getString(R.string.efficient_video), getString(R.string.use_hevc_leave_off_for_the_widest_head_unit_compatibility), AirPlayPersistence.loadHevcEnabled(this)) { AirPlayPersistence.saveHevcEnabled(this, it) }
+            toggle(card, "Software AAC decoder", "Use software decoder for AAC audio. Fixes audio on some MediaTek units.", AirPlayPersistence.loadAacSoftwareDecoderEnabled(this)) { AirPlayPersistence.saveAacSoftwareDecoderEnabled(this, it) }
+            toggle(card, "Software HEVC decoder", "Use software decoder for HEVC video.", AirPlayPersistence.loadHevcSoftwareDecoderEnabled(this)) { AirPlayPersistence.saveHevcSoftwareDecoderEnabled(this, it) }
             toggle(card, getString(R.string.right_hand_drive), getString(R.string.place_carplay_s_controls_closer_to_the_driver), AirPlayPersistence.loadRightHandDrive(this)) { AirPlayPersistence.saveRightHandDrive(this, it) }
             toggle(card, getString(R.string.full_screen), getString(R.string.hide_the_car_s_system_bars_while_carplay_is_open), AirPlayPersistence.loadHideTopBar(this) && AirPlayPersistence.loadHideBottomBar(this)) {
                 AirPlayPersistence.saveHideTopBar(this, it); AirPlayPersistence.saveHideBottomBar(this, it)
@@ -1206,3 +1208,4 @@ class DiPlayActivity : ComponentActivity() {
         private val WARNING = Color.rgb(255, 112, 67)
     }
 }
+

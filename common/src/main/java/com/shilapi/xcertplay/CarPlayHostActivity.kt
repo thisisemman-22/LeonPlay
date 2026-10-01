@@ -2957,6 +2957,7 @@ class CarPlayHostActivity : ComponentActivity() {
             videoWidth = videoWidth,
             videoHeight = videoHeight,
             preferSoftwareHevcDecoder = hevcSoftwareDecoderEnabled,
+            preferSoftwareAacDecoder = AirPlayPersistence.loadAacSoftwareDecoderEnabled(this),
             advancedAudioChannelMapping = advancedAudioChannelMapping,
             audioFocusEnabled = AirPlayPersistence.loadAudioFocusEnabled(this),
             mediaChannel = AirPlayPersistence.loadMediaAudioChannel(this),
@@ -3751,3 +3752,5 @@ internal object CarPlayBackgroundSession {
         height = 0
     }
 }
+
+

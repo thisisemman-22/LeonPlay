@@ -126,6 +126,16 @@ object AirPlayPersistence {
             .apply()
     }
 
+    fun loadAacSoftwareDecoderEnabled(context: Context): Boolean =
+        context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
+            .getBoolean("aac_software_decoder", false)
+
+    fun saveAacSoftwareDecoderEnabled(context: Context, enabled: Boolean) {
+        context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit()
+            .putBoolean("aac_software_decoder", enabled)
+            .apply()
+    }
+
     fun loadAdvancedAudioChannelMapping(context: Context): Boolean =
         context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
             .getBoolean(KEY_ADVANCED_AUDIO_CHANNEL_MAPPING, false)
@@ -693,3 +703,4 @@ object AirPlayPersistence {
     private fun safeAreaKey(widthPixels: Int, heightPixels: Int): String =
         "$SAFE_AREA_KEY_PREFIX${widthPixels}x$heightPixels"
 }
+
