@@ -80,7 +80,7 @@ object AirPlayPersistence {
 
     const val DEFAULT_MANUFACTURER = "LeonPlay"
     const val DEFAULT_MODEL = "LeonPlay"
-    const val DEFAULT_OEM_LABEL = "BYD"
+    const val DEFAULT_OEM_LABEL = "LeonPlay"
     const val DEFAULT_MFI_I2C_PATH = "/dev/i2c-1"
 
     fun loadDisplayScaleTenths(context: Context): Int {
@@ -248,8 +248,7 @@ object AirPlayPersistence {
         val prefs = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
         val stored = prefs.getString(KEY_WIRELESS_HOTSPOT_MODE, null)
         val mode = WirelessHotspotMode.entries.firstOrNull { it.name == stored }
-            ?: if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) WirelessHotspotMode.WIFI_P2P
-                else WirelessHotspotMode.MANUAL
+            ?: WirelessHotspotMode.MANUAL
         val supported = if (mode == WirelessHotspotMode.LOCAL_ONLY_HOTSPOT ||
             (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q && mode == WirelessHotspotMode.WIFI_P2P)
         ) WirelessHotspotMode.MANUAL else mode
@@ -703,4 +702,6 @@ object AirPlayPersistence {
     private fun safeAreaKey(widthPixels: Int, heightPixels: Int): String =
         "$SAFE_AREA_KEY_PREFIX${widthPixels}x$heightPixels"
 }
+
+
 

@@ -1,4 +1,4 @@
-﻿// SPDX-License-Identifier: AGPL-3.0-only
+// SPDX-License-Identifier: AGPL-3.0-only
 // UI copy and visual language adapted from DiAuto. See docs/THIRD_PARTY_NOTICES.md.
 package com.shilapi.xcertplay
 
@@ -274,6 +274,14 @@ class DiPlayActivity : ComponentActivity() {
             toggle(card, getString(R.string.right_hand_drive), getString(R.string.place_carplay_s_controls_closer_to_the_driver), AirPlayPersistence.loadRightHandDrive(this)) { AirPlayPersistence.saveRightHandDrive(this, it) }
             toggle(card, getString(R.string.full_screen), getString(R.string.hide_the_car_s_system_bars_while_carplay_is_open), AirPlayPersistence.loadHideTopBar(this) && AirPlayPersistence.loadHideBottomBar(this)) {
                 AirPlayPersistence.saveHideTopBar(this, it); AirPlayPersistence.saveHideBottomBar(this, it)
+            }
+        }
+        section(content, getString(R.string.identity_appearance)) { card ->
+            val brands = listOf("LeonPlay (Default)", "Toyota", "Honda", "Nissan", "Ford", "Chevrolet", "BMW", "Mercedes-Benz", "Audi", "Volkswagen")
+            val currentBrand = AirPlayPersistence.loadOemLabel(this)
+            val currentIndex = brands.indexOf(currentBrand).takeIf { it >= 0 } ?: 0
+            choice(card, "Car brand", brands, currentIndex) {
+                AirPlayPersistence.saveOemLabel(this, brands[it])
             }
         }
         section(content, getString(R.string.audio_routing)) { card ->
